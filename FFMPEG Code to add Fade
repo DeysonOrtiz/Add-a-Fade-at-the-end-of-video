@@ -1,0 +1,4 @@
+duration=$(ffprobe -i input.mp4 -v quiet -show_entries format=duration -hide_banner -of default=noprint_wrappers=1:nokey=1)
+st=$(echo $duration-1 | bc)
+echo "Duration minus 1 second is $st"
+ffmpeg -i input.mp4 -vf "fade=t=out:st=$st:d=0.5" -af "afade=t=out:st=$st:d=0.5" output.mp4
